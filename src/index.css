@@ -1,13 +1,42 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: sans-serif;
+  background: linear-gradient(to right,  rgba(230, 3, 3, 1), rgb(95, 3, 3));
+  background-repeat: no repeat;
+  background-size: cover;
+  color:white;
+  height:100%;
 }
+.welcome{
+  text-align: center;
+  margin-top: 150px;
+}
+@keyframes welcome{
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ }
+.signin{
+  margin-top: 60px;
+}
+.login{
+  margin-top: 60px;
+}
+.label{
+  margin-top: 10px;
+  color:white;
+}
+.list-item{
+  color:white;
+}
+.home{
+  color:white;
+}
+.dashboard{
+  color:white;
+}
+p{
+  color:white;
+}
+.links{
+  text-decoration: none;
+  color: white;
 }
