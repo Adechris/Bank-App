@@ -11,6 +11,7 @@ import Header from '../../Components/Header/Header';
 import Airtime from '../../Components/Content/Airtime';
 import PayBills from '../../Components/Content/PayBills';
 import Data from '../../Components/Content/Data';
+import History from '../../Components/Content/History';
 
 
 const App2 = () =>{
@@ -67,7 +68,43 @@ const App2 = () =>{
         }else{
           return []
         }
+      };
+
+      
+    
+
+      const storeBenefit = () =>{
+        let store = localStorage.getItem('ben');
+        if(store){
+          return JSON.parse(localStorage.getItem('ben'))
+        }
+        return []
       }
+     
+      const storeAmount= () =>{
+        let store = localStorage.getItem('amt');
+       if(store){
+        return JSON.parse(localStorage.getItem('amt'))
+       }
+       return []
+      }
+
+      const storeDesc = () =>{
+        let store = localStorage.getItem('des');
+        if(store){
+          return JSON.parse(localStorage.getItem('des'))
+        }
+        return []
+      }
+
+      // const storeBalance = () =>{
+      //   let store = localStorage.getItem('balance');
+      //   if(store){
+      //     return JSON.parse(localStorage.getItem('balance'))
+      //   }
+      //   return []
+      // }
+      
      
     
       const [firstName, setFirstName] = useState(storeFirstName());
@@ -75,9 +112,12 @@ const App2 = () =>{
       const [email, setEmail] = useState(storeEmail());
       const [password, setPassword] = useState(storePassword());
       const [pin, setPin] = useState(storePin());
-      const [balance, setBalance] =useState(parseInt(500));
-      const [acctNum, setAcctNum] =useState(storeAcct`0049${Math.floor(Math.random()* 1000000)}`) 
+      const [balance, setBalance] =useState(Number(500000));
+      const [acctNum, setAcctNum] =useState(`0049${Math.floor(Math.random()* 1000000)}`) 
     
+      const [benefit, setBenefit] = useState(storeBenefit())
+      const [amount, setAmount] = useState(storeAmount()) 
+      const [desc, setDesc] = useState(storeDesc())
     
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -86,12 +126,27 @@ const App2 = () =>{
           setFirstName('')
           setLastName('')
           setEmail('')
-          setPassword('')
+          setPassword('')   
           setPin('')
         }
       };
     
     
+      useEffect(() => {
+        localStorage.setItem("ben", JSON.stringify(benefit));
+      }, [benefit]);
+      
+      useEffect(() => {
+        localStorage.setItem("balance", JSON.stringify(balance));
+      }, [balance]);
+
+      useEffect(() => {
+        localStorage.setItem("amt", JSON.stringify(amount));
+      }, [amount]);
+      useEffect(() => {
+        localStorage.setItem("des", JSON.stringify(desc));
+      }, [desc]);
+
       useEffect(() => {
         localStorage.setItem("acct", JSON.stringify(acctNum));
       }, [acctNum]);
@@ -138,13 +193,39 @@ return <Router>
       email={email} password={password}
         />} />
         <Route path='*' element={<ErrorPage/>} />
-        <Route path='/deposit' element={<Deposit pin={pin} balance={balance} setBalance={setBalance}/>}/> 
-        <Route path='/transfer' element={<Transfer balance={balance} setBalance={setBalance} pin ={pin}/>}/>
+        <Route path='/deposit' element={<Deposit 
+        pin={pin} 
+        balance={balance} 
+        setBalance={setBalance}
+        amount={amount}
+        setAmount={setAmount}
+        
+        />}/>
+
+        <Route path='/transfer' element={<Transfer
+         benefit={benefit}
+         setBenefit={setBenefit}
+         desc={desc}
+         setDesc={setDesc}
+         amount={amount}
+         setAmount={setAmount} 
+         balance={balance} 
+        setBalance={setBalance} 
+         pin ={pin}/>}/>
+
         <Route path='/dashboard' element={<Dashboard 
         firstName={firstName}
         lastName={lastName}
         acctNum={acctNum}
         balance={balance}
+        />}/>
+        <Route path='history' element={<History 
+         benefit={benefit}
+         setBenefit={setBenefit}
+         desc={desc}
+         setDesc={setDesc}
+         amount={amount}
+         setAmount={setAmount}
         />}/>
       </Routes>
     </Router>

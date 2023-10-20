@@ -4,10 +4,8 @@ import Header from "../Header/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Transfer = ({ balance, pin, setBalance }) => {
-  const [benefit, setBenefit] = useState();
-  const [amount, setAmount] = useState();
-  const [desc, setDesc] = useState();
+const Transfer = ({ balance, pin, setBalance, benefit, setBenefit, desc, setDesc, amount, setAmount }) => {
+
   const [myPin, setMyPin] = useState();
 
   const navigate = useNavigate()
@@ -15,17 +13,24 @@ const Transfer = ({ balance, pin, setBalance }) => {
   const handleTransfer = (e) => {
     e.preventDefault()
     const newBalance = balance - Number(amount).toFixed(2);
-    setBalance(newBalance)
-if (pin!==myPin) {
+    if(balance > amount){
+      setBalance(newBalance)
+      alert(`You transferred ${amount} to ${benefit} at ${new Date().toLocaleTimeString()}`)
+      navigate('/dashboard')
+
+    }
+    else{
+      alert('Insufficient Fund')
+    }
+     
+ if(pin ===''){
+   alert('empty Pin ')
+ }     
+else if (pin!==myPin) {
     alert('Incorrect Pin')
 } 
-else if(balance < amount){
-  alert('Insufficient Fund')
-}
-else {
-  alert(`You transferred ${amount} to ${benefit} at ${new Date().toLocaleTimeString()}`)
-    navigate('/dashboard')
-} 
+
+ 
     
   };
   return (

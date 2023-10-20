@@ -70,7 +70,7 @@ const Dashboard = ({firstName, lastName, acctNum,balance}) => {
       <h5>Recent Transactions</h5>
       </div>
       <div className='col'>
-      <Link className='links'>View Transaction History</Link>
+      <Link className='links' to='/history'>View Transaction History</Link>
       </div>
       </div>
 

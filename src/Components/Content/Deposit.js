@@ -3,15 +3,15 @@ import { Container } from 'react-bootstrap'
 import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
 
-function Deposit({pin, balance, setBalance}) {
-    const [amount, setAmount] = useState();
+function Deposit({pin, balance, setBalance, amount, setAmount}) {
+    // const [amount, setAmount] = useState();
     const [myPin, setMyPin] = useState();
 
     const navigate = useNavigate()
 
     const handleDeposit = (e) =>{
             e.preventDefault();
-            const newBalance = parseInt(balance).toFixed(2) + parseInt(amount).toFixed(2);
+            const newBalance = Number(balance).toFixed(2) - Number(amount).toFixed(2);
             setBalance(newBalance)
             if (pin!==myPin) {
                 alert('Incorrect Pin')
@@ -26,7 +26,7 @@ function Deposit({pin, balance, setBalance}) {
         <Header/>
         <div className='mt-5 shadow-lg py-5 px-5'>
         <div className="text-center text-white">
-          <h3> Deposit</h3> 
+          <h3> Withdraw</h3> 
         </div>
             <form onSubmit={handleDeposit}>
     <input 
