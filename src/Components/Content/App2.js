@@ -70,8 +70,6 @@ const App2 = () =>{
         }
       };
 
-      
-    
 
       const storeBenefit = () =>{
         let store = localStorage.getItem('ben');
